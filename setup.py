@@ -6,9 +6,9 @@ setup(
     url='https://github.com/querbesd/public_code',
     packages=find_packages(),
     install_requires=[
-        'numpy',
-        'scikit-learn==1.0.2',
-        'joblib',
-        'scipy'
+        'numpy==1.18.5',
+        'scikit-learn==1.0',
+        'joblib==0.15.1',
+        'scipy==1.4.1'
     ],
 )
