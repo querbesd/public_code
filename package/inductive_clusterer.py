@@ -44,9 +44,9 @@ class InductiveClusterer(BaseEstimator, ClusterMixin, ClassifierMixin):
 
     def save_model(self, path):
         with open(path, "wb") as f:
-            joblib.dump(self, f)
+            pickle.dump(self, f)
 
     @classmethod
     def load_model(cls, path):
         with open(path, "rb") as f:
-            return joblib.load(f)
+            return pickle.load(f)
