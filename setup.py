@@ -7,7 +7,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'numpy',
-        'scikit-learn=1.0.2',
+        'scikit-learn==1.0.2',
         'scipy'
     ],
 )
