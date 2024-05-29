@@ -6,8 +6,8 @@ setup(
     url='https://github.com/querbesd/public_code',
     packages=find_packages(),
     install_requires=[
-        'numpy==1.18.5',
+        'numpy',
         'scikit-learn==1.0.2',
-        'scipy==1.4.1'
+        'scipy'
     ],
 )
