@@ -1,3 +1,10 @@
+from sklearn.base import BaseEstimator, ClusterMixin, ClassifierMixin, clone
+from sklearn.utils.metaestimators import if_delegate_has_method
+from scipy.optimize import linear_sum_assignment
+import numpy as np
+
+import logging
+
 logging.basicConfig(level=logging.INFO)
 
 class InductiveClusterer(BaseEstimator, ClusterMixin, ClassifierMixin):
