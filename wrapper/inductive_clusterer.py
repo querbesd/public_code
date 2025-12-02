@@ -27,15 +27,21 @@ class InductiveClusterer(BaseEstimator, ClusterMixin, ClassifierMixin):
         return self.classifier_.decision_function(X)
     
     def _align_labels(self, new_labels, previous_labels):
-        cost_matrix = np.zeros((len(np.unique(previous_labels)), len(np.unique(new_labels))))
-
-        for i in range(len(np.unique(previous_labels))):
-            for j in range(len(np.unique(new_labels))):
-                cost_matrix[i, j] = np.sum((previous_labels == i) & (new_labels == j))
-
+        unique_previous = np.unique(previous_labels)
+        unique_new = np.unique(new_labels)
+        
+        cost_matrix = np.zeros((len(unique_previous), len(unique_new)))
+        
+        for i, prev_label in enumerate(unique_previous):
+            for j, new_label in enumerate(unique_new):
+                cost_matrix[i, j] = np.sum((previous_labels == prev_label) & (new_labels == new_label))
+        
         row_ind, col_ind = linear_sum_assignment(cost_matrix, maximize=True)
-        mapping = {new_label: old_label for new_label, old_label in zip(col_ind, row_ind)}
-        aligned_labels = np.vectorize(mapping.get)(new_labels)
+        
+        mapping = {unique_new[col_idx]: unique_previous[row_idx] 
+                   for col_idx, row_idx in zip(col_ind, row_ind)}
+        
+        aligned_labels = np.array([mapping.get(label, label) for label in new_labels])
         return aligned_labels
 
     def fit_predict(self, X, y=None):
